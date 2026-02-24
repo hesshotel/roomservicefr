@@ -355,15 +355,18 @@
 
     // ✅ Tous les produits dans UN seul champ, séparés par " | "
     // Exemple : "2x Coca-Cola 33cl - 2.50€ | 1x Evian 50cl - 2.00€"
-    const commande = items.map(i => i.qty + 'x ' + i.full).join(' | ');
+const commande = items.map(i => i.qty + 'x ' + i.full).join(';;');
 
-    const formData = new FormData();
-    formData.append('nom', this.querySelector('[name="nom"]').value);
-    formData.append('chambre', this.querySelector('[name="chambre"]').value);
-    formData.append('commande', commande);
+const body = 'nom=' + encodeURIComponent(this.querySelector('[name="nom"]').value)
+           + '&chambre=' + encodeURIComponent(this.querySelector('[name="chambre"]').value)
+           + '&commande=' + encodeURIComponent(commande);
 
-    try {
-      await fetch(WEBAPP_URL, { method: 'POST', mode: 'no-cors', body: formData });
+await fetch(WEBAPP_URL, {
+  method: 'POST',
+  mode: 'no-cors',
+  headers: { 'Content-Type': 'text/plain' },
+  body: body
+});
       document.getElementById('form-section').style.display = 'none';
       document.getElementById('thank-you').style.display = 'block';
       window.scrollTo(0, 0);
