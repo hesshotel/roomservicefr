@@ -1,0 +1,181 @@
+<div style="
+  width:100%;
+  max-width:500px;
+  margin:0 auto;
+  font-family:'Montserrat', sans-serif;
+  box-sizing:border-box;
+  padding:10px;
+">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Header premium -->
+  <div style="
+    text-align:center;
+    padding:20px;
+    border-radius:12px;
+    background:#f9f9f9;
+    margin-bottom:20px;
+  ">
+    <img src="https://i.ibb.co/274t2102/image-hotel-01.jpg" alt="Room Service"
+         style="max-width:100%; height:auto; border-radius:12px; margin-bottom:15px;">
+    <h2 style="color:#820b49; margin:0;">Room Service</h2>
+    <p style="margin:8px 0 0; color:#555; font-size:14px;">
+      Commande de boissons & snacks en chambre
+    </p>
+  </div>
+
+  <!-- Info -->
+  <div style="
+    background:#fff;
+    border-radius:12px;
+    padding:15px;
+    border:1px solid #eee;
+    margin-bottom:20px;
+    font-size:14px;
+    color:#444;
+  ">
+    Les consommations commandées seront ajoutées à votre note de chambre.<br><br>
+    Nous pouvons vous monter les boissons et snacks en chambre tous les jours de 10h à 19h<br>
+    (délai moyen 15-20 minutes).<br><br>
+    <strong>En dehors de cette plage horaire, vous pouvez commander des boissons mais elles seront à récupérer à la réception.</strong>
+  </div>
+
+  <!-- Form -->
+  <form action="https://script.google.com/macros/s/AKfycbzjuLOQyAgBTAg9-tZh8LJ3zZN9jIzRNc-yqD10Oa9UgLcClrG_7DvqFxO9M7taHDIG/exec" method="post">
+
+    <!-- Nom -->
+    <label style="display:block; margin-bottom:6px; font-weight:500;">Nom *</label>
+    <input type="text" name="nom" required
+      style="
+        width:100%;
+        padding:12px;
+        margin-bottom:15px;
+        border:1px solid #ddd;
+        border-radius:8px;
+        font-size:14px;
+        box-sizing:border-box;
+      ">
+
+    <!-- Chambre -->
+    <label style="display:block; margin-bottom:6px; font-weight:500;">Numéro de chambre *</label>
+    <input type="text" name="chambre" required
+      style="
+        width:100%;
+        padding:12px;
+        margin-bottom:20px;
+        border:1px solid #ddd;
+        border-radius:8px;
+        font-size:14px;
+        box-sizing:border-box;
+      ">
+
+    <!-- Commandes -->
+    <div style="margin-bottom:15px; font-weight:500;">Choisissez vos produits</div>
+    <div style="font-size:13px; color:#777; margin-bottom:15px;">
+      Sélections multiples possibles
+    </div>
+
+    <!-- SOFT -->
+    <div style="font-weight:600; margin-bottom:8px; color:#820b49;">
+      Soft & boissons fraîches
+    </div>
+    <div style="
+      background:#fff;
+      border:1px solid #eee;
+      border-radius:12px;
+      padding:12px;
+      margin-bottom:15px;
+      font-size:14px;
+    ">
+      <label><input type="checkbox" name="commande" value="Evian 50cl - 2,00€"> Evian 50cl - 2,00€</label><br>
+      <label><input type="checkbox" name="commande" value="Perrier 33cl - 2,50€"> Perrier 33cl - 2,50€</label><br>
+      <label><input type="checkbox" name="commande" value="Coca-cola 33cl - 2,50€"> Coca-cola 33cl - 2,50€</label><br>
+      <label><input type="checkbox" name="commande" value="Ice Tea 33 cl - 2,50€"> Ice Tea 33 cl - 2,50€</label><br>
+      <label><input type="checkbox" name="commande" value="Red Bull 25cl - 3,50€"> Red Bull 25cl - 3,50€</label>
+    </div>
+
+    <!-- PETIT APERITIF -->
+    <div style="font-weight:600; margin-bottom:8px; color:#820b49;">
+      Petit apéritif
+    </div>
+    <div style="
+      background:#fff;
+      border:1px solid #eee;
+      border-radius:12px;
+      padding:12px;
+      margin-bottom:15px;
+      font-size:14px;
+    ">
+      <label><input type="checkbox" name="commande" value="Heineken 33cl - 3,00€"> Heineken 33cl - 3,00€</label><br>
+      <label><input type="checkbox" name="commande" value="Vin Rouge 25cl - 5,00€"> Vin Rouge 25cl - 5,00€</label><br>
+      <label><input type="checkbox" name="commande" value="Vin Blanc 25cl - 5,00€"> Vin Blanc 25cl - 5,00€</label><br>
+      <label><input type="checkbox" name="commande" value="Champagne Nicolas Feuillatte 37,5cl - 25,00€"> Champagne Nicolas Feuillatte 37,5cl - 25,00€</label>
+    </div>
+
+    <!-- GRANDE BOUTEILLE -->
+    <div style="font-weight:600; margin-bottom:8px; color:#820b49;">
+      Grandes bouteilles
+    </div>
+    <div style="
+      background:#fff;
+      border:1px solid #eee;
+      border-radius:12px;
+      padding:12px;
+      margin-bottom:15px;
+      font-size:14px;
+    ">
+      <label><input type="checkbox" name="commande" value="Vin rouge 75cl - 19,80€"> Vin rouge 75cl - 19,80€</label><br>
+      <label><input type="checkbox" name="commande" value="Vin blanc 75cl - 19,80€"> Vin blanc 75cl - 19,80€</label><br>
+      <label><input type="checkbox" name="commande" value="Champagne Nicolas Feuillatte 75cl - 55,00€"> Champagne Nicolas Feuillatte 75cl - 55,00€</label>
+    </div>
+
+    <!-- SNACK -->
+    <div style="font-weight:600; margin-bottom:8px; color:#820b49;">
+      Snacks
+    </div>
+    <div style="
+      background:#fff;
+      border:1px solid #eee;
+      border-radius:12px;
+      padding:12px;
+      margin-bottom:15px;
+      font-size:14px;
+    ">
+      <label><input type="checkbox" name="commande" value="Chips Brets - 2,00€"> Chips "Brets" - 2,00€</label><br>
+      <label><input type="checkbox" name="commande" value="Cacahuètes - 2,50€"> Cacahuètes - 2,50€</label><br>
+      <label><input type="checkbox" name="commande" value="M&M's - 2,50€"> M&M's - 2,50€</label>
+    </div>
+
+    <!-- Quantité -->
+    <label style="display:block; margin-bottom:6px; font-weight:500;">
+      Quantité (à remplir uniquement si plusieurs exemplaires du même produit)
+    </label>
+    <input type="text" name="quantite"
+      style="
+        width:100%;
+        padding:12px;
+        margin-bottom:20px;
+        border:1px solid #ddd;
+        border-radius:8px;
+        font-size:14px;
+        box-sizing:border-box;
+      ">
+
+    <button type="submit"
+      style="
+        background:#820b49;
+        color:white;
+        border:none;
+        padding:14px;
+        border-radius:25px;
+        font-weight:500;
+        width:100%;
+        cursor:pointer;
+        font-size:15px;
+      ">
+      Envoyer ma commande
+    </button>
+
+  </form>
+</div>
