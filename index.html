@@ -1,181 +1,451 @@
-<div style="
-  width:100%;
-  max-width:500px;
-  margin:0 auto;
-  font-family:'Montserrat', sans-serif;
-  box-sizing:border-box;
-  padding:10px;
-">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Service</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #f5f5f5;
+      padding: 20px 16px 40px;
+    }
+    .wrapper { max-width: 500px; margin: 0 auto; }
 
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+    .header {
+      text-align: center;
+      padding: 20px;
+      border-radius: 12px;
+      background: #f9f9f9;
+      margin-bottom: 20px;
+    }
+    .header img { max-width: 100%; border-radius: 12px; margin-bottom: 15px; }
+    .header h2 { color: #820b49; }
+    .header p { margin-top: 8px; color: #555; font-size: 14px; }
 
-  <!-- Header premium -->
-  <div style="
-    text-align:center;
-    padding:20px;
-    border-radius:12px;
-    background:#f9f9f9;
-    margin-bottom:20px;
-  ">
-    <img src="https://i.ibb.co/274t2102/image-hotel-01.jpg" alt="Room Service"
-         style="max-width:100%; height:auto; border-radius:12px; margin-bottom:15px;">
-    <h2 style="color:#820b49; margin:0;">Room Service</h2>
-    <p style="margin:8px 0 0; color:#555; font-size:14px;">
-      Commande de boissons & snacks en chambre
-    </p>
+    .info-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 15px;
+      border: 1px solid #eee;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    label.field-label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      font-size: 14px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .products-title { font-weight: 600; margin-bottom: 5px; font-size: 14px; }
+    .products-hint { font-size: 13px; color: #777; margin-bottom: 18px; }
+
+    .category-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #820b49;
+      font-size: 14px;
+    }
+    .category-box {
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 8px 12px;
+      margin-bottom: 15px;
+    }
+
+    .product-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #f5f5f5;
+      gap: 10px;
+    }
+    .product-row:last-child { border-bottom: none; }
+
+    .product-name { font-size: 14px; color: #333; flex: 1; }
+    .product-price { font-size: 13px; color: #888; white-space: nowrap; margin-right: 10px; }
+
+    .qty-stepper {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid #ddd;
+      border-radius: 20px;
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: border-color 0.2s;
+    }
+    .qty-stepper.active { border-color: #820b49; }
+
+    .qty-btn {
+      background: none;
+      border: none;
+      width: 32px;
+      height: 32px;
+      font-size: 18px;
+      cursor: pointer;
+      color: #820b49;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+    }
+    .qty-btn:hover { background: #fdf2f7; }
+
+    .qty-value {
+      width: 26px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #aaa;
+    }
+    .qty-value.active { color: #820b49; }
+
+    #summary-bar {
+      display: none;
+      background: #fdf2f7;
+      border: 1px solid #e8b8d0;
+      border-radius: 10px;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      font-size: 13px;
+      color: #820b49;
+      line-height: 1.6;
+    }
+    #summary-bar strong { display: block; margin-bottom: 4px; font-size: 14px; }
+
+    .submit-btn {
+      background: #820b49;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 25px;
+      font-weight: 600;
+      width: 100%;
+      cursor: pointer;
+      font-size: 15px;
+      font-family: 'Montserrat', sans-serif;
+      transition: background 0.2s;
+    }
+    .submit-btn:hover { background: #6a0939; }
+    .submit-btn:disabled { background: #ccc; cursor: not-allowed; }
+
+    #thank-you {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+      background: #fff;
+      border-radius: 12px;
+    }
+    #thank-you h2 { color: #820b49; margin-bottom: 15px; }
+    #thank-you p { color: #555; font-size: 15px; line-height: 1.7; }
+    .check-icon { font-size: 55px; margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div id="form-section">
+
+    <div class="header">
+      <img src="https://i.ibb.co/274t2102/image-hotel-01.jpg" alt="Room Service">
+      <h2>Room Service</h2>
+      <p>Boissons & snacks livrés dans votre chambre</p>
+    </div>
+
+    <div class="info-box">
+      Les commandes seront ajoutées à votre note de chambre.<br><br>
+      Nous pouvons livrer boissons et snacks dans votre chambre tous les jours de <strong>10h00 à 19h00</strong>
+      (délai de livraison moyen : 15–20 minutes).<br><br>
+      <strong>En dehors de ces horaires, les boissons peuvent toujours être commandées mais doivent être récupérées à la réception.</strong>
+    </div>
+
+    <form id="order-form">
+
+      <label class="field-label">Nom *</label>
+      <input type="text" name="nom" required placeholder="Votre nom">
+
+      <label class="field-label">Numéro de chambre *</label>
+      <input type="text" name="chambre" required placeholder="ex. 12">
+
+      <div class="products-title">Choisissez vos produits</div>
+      <div class="products-hint">Utilisez + et − pour définir les quantités</div>
+
+      <div class="category-title">🥤 Soft drinks</div>
+      <div class="category-box">
+        <div class="product-row">
+          <span class="product-name">Evian 50cl</span>
+          <span class="product-price">2,00€</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn minus">−</button>
+            <span class="qty-value" data-product="Evian 50cl - 2.00€">0</span>
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+        <div class="product-row">
+          <span class="product-name">Perrier 33cl</span>
+          <span class="product-price">2,50€</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn minus">−</button>
+            <span class="qty-value" data-product="Perrier 33cl - 2.50€">0</span>
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+        <div class="product-row">
+          <span class="product-name">Coca-Cola 33cl</span>
+          <span class="product-price">2,50€</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn minus">−</button>
+            <span class="qty-value" data-product="Coca-Cola 33cl - 2.50€">0</span>
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+        <div class="product-row">
+          <span class="product-name">Ice Tea 33cl</span>
+          <span class="product-price">2,50€</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn minus">−</button>
+            <span class="qty-value" data-product="Ice Tea 33cl - 2.50€">0</span>
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+        <div class="product-row">
+          <span class="product-name">Red Bull 25cl</span>
+          <span class="product-price">3,50€</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn minus">−</button>
+            <span class="qty-value" data-product="Red Bull 25cl - 3.50€">0</span>
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-title">🍷 Petits apéritifs</div>
+      <div class="category-box">
+        <div class="product-row">
+          <span class="product-name">Heineken 33cl</span>
+          <span class="product-price">3,00€</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn minus">−</button>
+            <span class="qty-value" data-product="Heineken 33cl - 3.00€">0</span>
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+        <div class="product-row">
+          <span class="product-name">Vin rouge 25cl</span>
+          <span class="product-price">5,00€</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn minus">−</button>
+            <span class="qty-value" data-product="Vin rouge 25cl - 5.00€">0</span>
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+        <div class="product-row">
+          <span class="product-name">Vin blanc 25cl</span>
+          <span class="product-price">5,00€</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn minus">−</button>
+            <span class="qty-value" data-product="Vin blanc 25cl - 5.00€">0</span>
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+        <div class="product-row">
+          <span class="product-name">Champagne Nicolas Feuillatte 37,5cl</span>
+          <span class="product-price">25,00€</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn minus">−</button>
+            <span class="qty-value" data-product="Champagne Nicolas Feuillatte 37.5cl - 25.00€">0</span>
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-title">🍾 Grandes bouteilles & premium</div>
+      <div class="category-box">
+        <div class="product-row">
+          <span class="product-name">Vin rouge 75cl</span>
+          <span class="product-price">19,80€</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn minus">−</button>
+            <span class="qty-value" data-product="Vin rouge 75cl - 19.80€">0</span>
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+        <div class="product-row">
+          <span class="product-name">Vin blanc 75cl</span>
+          <span class="product-price">19,80€</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn minus">−</button>
+            <span class="qty-value" data-product="Vin blanc 75cl - 19.80€">0</span>
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+        <div class="product-row">
+          <span class="product-name">Champagne Nicolas Feuillatte 75cl</span>
+          <span class="product-price">55,00€</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn minus">−</button>
+            <span class="qty-value" data-product="Champagne Nicolas Feuillatte 75cl - 55.00€">0</span>
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-title">🍿 Snacks</div>
+      <div class="category-box">
+        <div class="product-row">
+          <span class="product-name">Chips Brets</span>
+          <span class="product-price">2,00€</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn minus">−</button>
+            <span class="qty-value" data-product="Chips Brets - 2.00€">0</span>
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+        <div class="product-row">
+          <span class="product-name">Cacahuètes</span>
+          <span class="product-price">2,50€</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn minus">−</button>
+            <span class="qty-value" data-product="Cacahuètes - 2.50€">0</span>
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+        <div class="product-row">
+          <span class="product-name">M&M's</span>
+          <span class="product-price">2,50€</span>
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn minus">−</button>
+            <span class="qty-value" data-product="M&M's - 2.50€">0</span>
+            <button type="button" class="qty-btn plus">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="summary-bar">
+        <strong>🛒 Votre commande :</strong>
+        <span id="summary-text"></span>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submit-btn">Envoyer ma commande</button>
+
+    </form>
   </div>
 
-  <!-- Info -->
-  <div style="
-    background:#fff;
-    border-radius:12px;
-    padding:15px;
-    border:1px solid #eee;
-    margin-bottom:20px;
-    font-size:14px;
-    color:#444;
-  ">
-    Les consommations commandées seront ajoutées à votre note de chambre.<br><br>
-    Nous pouvons vous monter les boissons et snacks en chambre tous les jours de 10h à 19h<br>
-    (délai moyen 15-20 minutes).<br><br>
-    <strong>En dehors de cette plage horaire, vous pouvez commander des boissons mais elles seront à récupérer à la réception.</strong>
+  <div id="thank-you">
+    <div class="check-icon">✅</div>
+    <h2>Merci !</h2>
+    <p>Votre commande a bien été reçue.<br>Nous vous la livrons dans votre chambre dans les plus brefs délais.<br><br>
+    <span style="font-size:13px; color:#888;">N'hésitez pas à contacter la réception pour toute question.</span></p>
   </div>
 
-  <!-- Form -->
-  <form action="https://script.google.com/macros/s/AKfycbzjuLOQyAgBTAg9-tZh8LJ3zZN9jIzRNc-yqD10Oa9UgLcClrG_7DvqFxO9M7taHDIG/exec" method="post">
-
-    <!-- Nom -->
-    <label style="display:block; margin-bottom:6px; font-weight:500;">Nom *</label>
-    <input type="text" name="nom" required
-      style="
-        width:100%;
-        padding:12px;
-        margin-bottom:15px;
-        border:1px solid #ddd;
-        border-radius:8px;
-        font-size:14px;
-        box-sizing:border-box;
-      ">
-
-    <!-- Chambre -->
-    <label style="display:block; margin-bottom:6px; font-weight:500;">Numéro de chambre *</label>
-    <input type="text" name="chambre" required
-      style="
-        width:100%;
-        padding:12px;
-        margin-bottom:20px;
-        border:1px solid #ddd;
-        border-radius:8px;
-        font-size:14px;
-        box-sizing:border-box;
-      ">
-
-    <!-- Commandes -->
-    <div style="margin-bottom:15px; font-weight:500;">Choisissez vos produits</div>
-    <div style="font-size:13px; color:#777; margin-bottom:15px;">
-      Sélections multiples possibles
-    </div>
-
-    <!-- SOFT -->
-    <div style="font-weight:600; margin-bottom:8px; color:#820b49;">
-      Soft & boissons fraîches
-    </div>
-    <div style="
-      background:#fff;
-      border:1px solid #eee;
-      border-radius:12px;
-      padding:12px;
-      margin-bottom:15px;
-      font-size:14px;
-    ">
-      <label><input type="checkbox" name="commande" value="Evian 50cl - 2,00€"> Evian 50cl - 2,00€</label><br>
-      <label><input type="checkbox" name="commande" value="Perrier 33cl - 2,50€"> Perrier 33cl - 2,50€</label><br>
-      <label><input type="checkbox" name="commande" value="Coca-cola 33cl - 2,50€"> Coca-cola 33cl - 2,50€</label><br>
-      <label><input type="checkbox" name="commande" value="Ice Tea 33 cl - 2,50€"> Ice Tea 33 cl - 2,50€</label><br>
-      <label><input type="checkbox" name="commande" value="Red Bull 25cl - 3,50€"> Red Bull 25cl - 3,50€</label>
-    </div>
-
-    <!-- PETIT APERITIF -->
-    <div style="font-weight:600; margin-bottom:8px; color:#820b49;">
-      Petit apéritif
-    </div>
-    <div style="
-      background:#fff;
-      border:1px solid #eee;
-      border-radius:12px;
-      padding:12px;
-      margin-bottom:15px;
-      font-size:14px;
-    ">
-      <label><input type="checkbox" name="commande" value="Heineken 33cl - 3,00€"> Heineken 33cl - 3,00€</label><br>
-      <label><input type="checkbox" name="commande" value="Vin Rouge 25cl - 5,00€"> Vin Rouge 25cl - 5,00€</label><br>
-      <label><input type="checkbox" name="commande" value="Vin Blanc 25cl - 5,00€"> Vin Blanc 25cl - 5,00€</label><br>
-      <label><input type="checkbox" name="commande" value="Champagne Nicolas Feuillatte 37,5cl - 25,00€"> Champagne Nicolas Feuillatte 37,5cl - 25,00€</label>
-    </div>
-
-    <!-- GRANDE BOUTEILLE -->
-    <div style="font-weight:600; margin-bottom:8px; color:#820b49;">
-      Grandes bouteilles
-    </div>
-    <div style="
-      background:#fff;
-      border:1px solid #eee;
-      border-radius:12px;
-      padding:12px;
-      margin-bottom:15px;
-      font-size:14px;
-    ">
-      <label><input type="checkbox" name="commande" value="Vin rouge 75cl - 19,80€"> Vin rouge 75cl - 19,80€</label><br>
-      <label><input type="checkbox" name="commande" value="Vin blanc 75cl - 19,80€"> Vin blanc 75cl - 19,80€</label><br>
-      <label><input type="checkbox" name="commande" value="Champagne Nicolas Feuillatte 75cl - 55,00€"> Champagne Nicolas Feuillatte 75cl - 55,00€</label>
-    </div>
-
-    <!-- SNACK -->
-    <div style="font-weight:600; margin-bottom:8px; color:#820b49;">
-      Snacks
-    </div>
-    <div style="
-      background:#fff;
-      border:1px solid #eee;
-      border-radius:12px;
-      padding:12px;
-      margin-bottom:15px;
-      font-size:14px;
-    ">
-      <label><input type="checkbox" name="commande" value="Chips Brets - 2,00€"> Chips "Brets" - 2,00€</label><br>
-      <label><input type="checkbox" name="commande" value="Cacahuètes - 2,50€"> Cacahuètes - 2,50€</label><br>
-      <label><input type="checkbox" name="commande" value="M&M's - 2,50€"> M&M's - 2,50€</label>
-    </div>
-
-    <!-- Quantité -->
-    <label style="display:block; margin-bottom:6px; font-weight:500;">
-      Quantité (à remplir uniquement si plusieurs exemplaires du même produit)
-    </label>
-    <input type="text" name="quantite"
-      style="
-        width:100%;
-        padding:12px;
-        margin-bottom:20px;
-        border:1px solid #ddd;
-        border-radius:8px;
-        font-size:14px;
-        box-sizing:border-box;
-      ">
-
-    <button type="submit"
-      style="
-        background:#820b49;
-        color:white;
-        border:none;
-        padding:14px;
-        border-radius:25px;
-        font-weight:500;
-        width:100%;
-        cursor:pointer;
-        font-size:15px;
-      ">
-      Envoyer ma commande
-    </button>
-
-  </form>
 </div>
+
+<script>
+  const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzjuLOQyAgBTAg9-tZh8LJ3zZN9jIzRNc-yqD10Oa9UgLcClrG_7DvqFxO9M7taHDIG/exec";
+
+  document.querySelectorAll('.qty-stepper').forEach(function(stepper) {
+    const valueEl = stepper.querySelector('.qty-value');
+    stepper.querySelector('.minus').addEventListener('click', function() {
+      let val = parseInt(valueEl.textContent);
+      if (val > 0) {
+        val--;
+        valueEl.textContent = val;
+        valueEl.classList.toggle('active', val > 0);
+        stepper.classList.toggle('active', val > 0);
+        updateSummary();
+      }
+    });
+    stepper.querySelector('.plus').addEventListener('click', function() {
+      let val = parseInt(valueEl.textContent);
+      if (val < 10) {
+        val++;
+        valueEl.textContent = val;
+        valueEl.classList.add('active');
+        stepper.classList.add('active');
+        updateSummary();
+      }
+    });
+  });
+
+  function getOrderItems() {
+    const items = [];
+    document.querySelectorAll('.qty-value').forEach(function(el) {
+      const qty = parseInt(el.textContent);
+      if (qty > 0) {
+        items.push({ qty: qty, full: el.dataset.product });
+      }
+    });
+    return items;
+  }
+
+  function updateSummary() {
+    const items = getOrderItems();
+    const bar = document.getElementById('summary-bar');
+    if (items.length === 0) {
+      bar.style.display = 'none';
+    } else {
+      bar.style.display = 'block';
+      document.getElementById('summary-text').textContent =
+        items.map(i => i.qty + '× ' + i.full.split(' - ')[0]).join(', ');
+    }
+  }
+
+  document.getElementById('order-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const items = getOrderItems();
+    if (items.length === 0) {
+      alert('Veuillez sélectionner au moins un produit.');
+      return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Envoi en cours...';
+
+    const params = new URLSearchParams();
+    params.append('nom', this.querySelector('[name="nom"]').value);
+    params.append('chambre', this.querySelector('[name="chambre"]').value);
+
+    items.forEach(function(item) {
+      params.append('commande', item.qty + '\u00d7 ' + item.full);
+    });
+
+    try {
+      await fetch(WEBAPP_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString()
+      });
+      document.getElementById('form-section').style.display = 'none';
+      document.getElementById('thank-you').style.display = 'block';
+      window.scrollTo(0, 0);
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Envoyer ma commande';
+      alert('Une erreur est survenue. Veuillez réessayer ou contacter la réception.');
+    }
+  });
+</script>
+
+</body>
+</html>
